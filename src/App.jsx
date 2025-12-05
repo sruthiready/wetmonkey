@@ -929,7 +929,7 @@ Research targets: ${researchTargets.length}`;
       />
 
       <main className="mt-4 space-y-4">
-        currentView === "dashboard" && (
+        {currentView === "dashboard" && (
   <DashboardView
     reminders={reminders}
 
