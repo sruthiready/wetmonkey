@@ -44,8 +44,8 @@ export default function DashboardView({
   frogName,
   tagline,
   stats,
-  openAddJob,
-  openAddResearch,
+  onAddJob,
+  onAddResearch,
 }) {
   stats = stats || { active: 0, interviews: 0, research: 0, actions: 0 };
 
