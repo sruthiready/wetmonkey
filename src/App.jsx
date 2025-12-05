@@ -929,16 +929,29 @@ Research targets: ${researchTargets.length}`;
       />
 
       <main className="mt-4 space-y-4">
-        {currentView === "dashboard" && (
-          <DashboardView
-            reminders={reminders}
-            activeJobsCount={activeCount}
-            interviewsThisWeek={interviewsThisWeek}
-            researchCount={researchTargets.length}
-            onAddJob={() => openAddModal("job")}
-            onAddResearch={() => openAddModal("research")}
-          />
-        )}
+        currentView === "dashboard" && (
+  <DashboardView
+    reminders={reminders}
+
+    activeJobsCount={jobs.length}
+
+    interviewsThisWeek={
+      jobs.filter(j =>
+        (j.interviews || []).some(i => {
+          const date = new Date(i.date);
+          const now = new Date();
+          const diff = (date - now) / (1000 * 60 * 60 * 24);
+          return diff >= 0 && diff <= 7; // in next 7 days
+        })
+      ).length
+    }
+
+    researchCount={researchTargets.length}
+
+    onAddJob={() => openAddModal("job")}
+    onAddResearch={() => openAddModal("research")}
+  />
+)}
 
         {currentView === "pipeline" && (
           <PipelineView
